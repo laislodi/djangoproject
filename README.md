@@ -30,24 +30,6 @@ The latest and greatest Django version is the one that’s in our Git repository
 ## Set up a database
 This step is only necessary if you’d like to work with a “large” database engine like PostgreSQL, MariaDB, MySQL, or Oracle. To install such a database, consult the [database installation information](https://docs.djangoproject.com/en/5.1/topics/install/#database-installation).
 
-### Details on Database
-If you plan to use Django’s database API functionality, you’ll need to make sure a database server is running. Django supports many different database servers and is officially supported with PostgreSQL, MariaDB, MySQL, Oracle and SQLite.
-
-If you are developing a small project or something you don’t plan to deploy in a production environment, SQLite is generally the best option as it doesn’t require running a separate server. However, SQLite has many differences from other databases, so if you are working on something substantial, it’s recommended to develop with the same database that you plan on using in production.
-
-To use another database other than SQLite, you’ll need to make sure that the appropriate Python database bindings are installed:
-- If you’re using PostgreSQL, you’ll need the [psycopg](https://www.psycopg.org/psycopg3/) or [psycopg2](https://www.psycopg.org/) package. Refer to the [PostgreSQL notes](https://docs.djangoproject.com/en/5.1/ref/databases/#postgresql-notes) for further details.
-- If you’re using MySQL or MariaDB, you’ll need a [DB API driver](https://docs.djangoproject.com/en/5.1/ref/databases/#mysql-db-api-drivers) like **mysqlclient**. See [notes for the MySQL backend](https://docs.djangoproject.com/en/5.1/ref/databases/#mysql-notes) for details.
-- If you’re using SQLite you might want to read the [SQLite backend notes](https://docs.djangoproject.com/en/5.1/ref/databases/#sqlite-notes).
-- If you’re using Oracle, you’ll need to install [oracledb](https://oracle.github.io/python-oracledb/), but please read the [notes for the Oracle backend](https://docs.djangoproject.com/en/5.1/ref/databases/#oracle-notes) for details regarding supported versions of both Oracle and **oracledb**.
-- If you’re using an unofficial 3rd party backend, please consult the documentation provided for any additional requirements.
-
-And ensure that the following keys in the 'default' item of the DATABASES dictionary match your database connection settings:
-- **ENGINE** – Either **'django.db.backends.sqlite3'**, **'django.db.backends.postgresql'**, **'django.db.backends.mysql'**, or **'django.db.backends.oracle'**. Other backends are [also available](https://docs.djangoproject.com/en/5.1/ref/databases/#third-party-notes).
-- **NAME** – The name of your database. If you’re using SQLite, the database will be a file on your computer. In that case, **NAME** should be the full absolute path, including the filename of that file. You don’t need to create anything beforehand; the database file will be created automatically when needed. The default value, **BASE_DIR / 'db.sqlite3'**, will store the file in your project directory.
-
-If you are not using SQLite as your database, additional settings such as **USER**, **PASSWORD**, and **HOST** must be added. For more details, see the reference documentation for [DATABASES](https://docs.djangoproject.com/en/5.1/ref/settings/#std-setting-DATABASES).
-
 
 # [Part 1](https://docs.djangoproject.com/en/5.1/intro/tutorial01/)
 
@@ -57,10 +39,23 @@ Throughout this tutorial, we’ll walk you through the creation of a basic poll 
 
 It’ll consist of two parts:
 
-A public site that lets people view polls and vote in them.
-An admin site that lets you add, change, and delete polls.
+- A public site that lets people view polls and vote in them.
+- An admin site that lets you add, change, and delete polls.
+
+We’ll assume you have [Django installed](https://docs.djangoproject.com/en/5.1/intro/install/) already. You can tell Django is installed and which version by running the following command in a shell prompt:
+
+>```
+>python -m django --version
+>```
+
+If Django is installed, you should see the version of your installation. If it isn’t, you’ll get an error telling “No module named django”.
+
+This tutorial is written for Django 5.1, which supports Python 3.10 and later. If the Django version doesn’t match, you can refer to the tutorial for your version of Django by using the version switcher at the bottom right corner of this page, or update Django to the newest version. If you’re using an older version of Python, check [What Python version can I use with Django?](https://docs.djangoproject.com/en/5.1/faq/install/#faq-python-version-support) to find a compatible version of Django.
+
+See [How to install Django](https://docs.djangoproject.com/en/5.1/topics/install/) for advice on how to remove older versions of Django and install a newer one.
 
 ## Creating a project
+
 From the command line, cd into a directory where you’d like to store your code and create a new directory named **djangotutorial**. (This directory name doesn’t matter to Django; you can rename it to anything you like.)
 
 >```
@@ -243,7 +238,7 @@ Also, note the **[INSTALLED_APPS](https://docs.djangoproject.com/en/5.1/ref/sett
 By default, INSTALLED_APPS contains the following apps, all of which come with Django:
 - **[django.contrib.admin](https://docs.djangoproject.com/en/5.1/ref/contrib/admin/#module-django.contrib.admin)** – The admin site. You’ll use it shortly.
 - **[django.contrib.auth](https://docs.djangoproject.com/en/5.1/topics/auth/#module-django.contrib.auth)** – An authentication system.
-- **[django.contrib.contenttypes](https://docs.djangoproject.com/en/5.1/ref/contrib/contenttypes/#module-django.contrib.contenttypes) – A framework for content types.
+- **[django.contrib.contenttypes](https://docs.djangoproject.com/en/5.1/ref/contrib/contenttypes/#module-django.contrib.contenttypes)** – A framework for content types.
 - **[django.contrib.sessions](https://docs.djangoproject.com/en/5.1/topics/http/sessions/#module-django.contrib.sessions)** – A session framework.
 - **[django.contrib.messages](https://docs.djangoproject.com/en/5.1/ref/contrib/messages/#module-django.contrib.messages)** – A messaging framework.
 - **[django.contrib.staticfiles](https://docs.djangoproject.com/en/5.1/ref/contrib/staticfiles/#module-django.contrib.staticfiles)** – A framework for managing static files.
